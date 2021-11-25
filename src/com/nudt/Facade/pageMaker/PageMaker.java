@@ -2,6 +2,7 @@ package com.nudt.Facade.pageMaker;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -28,13 +29,32 @@ public class PageMaker {
             htmlWriter.makeParagraph("欢迎来到" + username + "的主页！！！");
             htmlWriter.makeParagraph("欢迎来信：");
             htmlWriter.mailto(mailaddress, username);
-            htmlWriter.makeLink("LinkPage.html","友情链接");
+            htmlWriter.makeLink("SearchLinkPage.html", "友情链接");
+            htmlWriter.makeLink("AllLinkPage.html", "mail address link");
             htmlWriter.close();
 
-            System.out.printf("%s is created for %s (%s)", filename, mailaddress, username);
+            System.out.printf("%s is created for %s (%s)\n", filename, mailaddress, username);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static void makeLinkPage(String filename) {
+        try {
+            HtmlWriter htmlWriter = new HtmlWriter(new FileWriter(filename));
+            htmlWriter.makeTitle("mail Link page");
+            Properties maildata = Database.getProperties("maildata");
+            Enumeration<?> propertyNames = maildata.propertyNames();
+            while (propertyNames.hasMoreElements()) {
+                String mailaddress = (String) propertyNames.nextElement();
+                String username = maildata.getProperty(mailaddress, "unknown");
+                htmlWriter.mailto(mailaddress, username);
+            }
+            htmlWriter.close();
+            System.out.printf("%s is created!!!\n", filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -39,7 +39,7 @@ public class MainAbstractFactory {
         forFun.add(bi);
         forFun.add(bh);
 
-        Page page = factory.createPage("LinkPage", "hui");
+        Page page = factory.createPage("SearchLinkPage", "hui");
         page.add(search);
         page.add(forFun);
         page.output();

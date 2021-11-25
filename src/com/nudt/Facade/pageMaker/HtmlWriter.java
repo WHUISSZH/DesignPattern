@@ -18,16 +18,16 @@ public class HtmlWriter {
     }
 
     public void makeTitle(String title) throws IOException {
-        writer.write("<html>");
-        writer.write("<head>");
-        writer.write("<title>" + title + "</title>");
-        writer.write("</head>");
+        writer.write("<html>\n");
+        writer.write("<head>\n");
+        writer.write("<title>" + title + "</title>\n");
+        writer.write("</head>\n");
         writer.write("<body>\n");
         writer.write("<h1>" + title + "</h1>\n");
     }
 
     public void makeParagraph(String msg) throws IOException {
-        writer.write("<p>" + msg + "</p>");
+        writer.write("<p>" + msg + "</p>\n");
     }
 
     public void makeLink(String href, String caption) throws IOException {
@@ -39,7 +39,7 @@ public class HtmlWriter {
     }
 
     public void close() throws IOException {
-        writer.write("</body>");
+        writer.write("</body>\n");
         writer.write("</html>");
         writer.close();
     }
